@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>P圈</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="/vender/layui/css/layui.css" type="text/css" rel="stylesheet">
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/static/css/public.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/detail.css" rel="stylesheet" type="text/css">
+</head>
+<body class="layui-bg-gray">
+<div class="layui-fluid">
+    <!--    导航开始-->
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-xs12">
+            <ul class="layui-nav layui-bg-cyan">
+                <li class="layui-nav-item layui-logo">
+                    <a href="/"><img src="/static/other/img/logo.png" class="layui-logo"
+                                     style="max-height: 50px;max-width: 50px">P圈学习社区</a>
+                </li>
+                <li class="layui-nav-item" style="float: right">
+                    <{:session("user_id")?'<a href="/index/auth/logout.html">退出</a>':'
+                    <a href="/index/user/register.html">注册</a>
+                    '}>
+                </li>
+                <li class="layui-nav-item" style="float: right">
+                    <a href="/index/user/login.html"><{:session("user_info.username")?session("user_info.username"):"未登录"}></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--    导航结束-->
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-xs12 layui-col-md12">
+            <div class="layui-card p-source-main p-card-bg-black">
+                <div class="layui-card-header">考研宝典</div>
+                <div class="layui-card-body">
+                    <div class="layui-card p-card-bg-white">
+                        <div class="layui-card-body">
+                            <div class="layui-row layui-col-space18">
+                                <div class="layui-col-xs12 layui-col-sm-offset1 layui-col-sm10">
+                                    <div class="layui-card">
+                                        <div class="layui-card-body">
+                                            <div class="layui-row">
+                                                <!--                                图片展示区域-->
+                                                <div class="layui-col-xs12 layui-col-md4">
+                                                    <img src="/static/cover/<{$source.image}>" class="p-source-image">
+                                                </div>
+                                                <!--                                信息展示区域-->
+                                                <div class="layui-col-xs12 layui-col-md6 layui-col-sm-offset1 layui-text p-source-info">
+                                                    <p style="font-size: 1.2rem;"><{$source.source_name}></p>
+                                                    <div class="layui-text layui-bg-gray"
+                                                         style="border-radius: 2px;margin-top: 15px;font-size: 0.8rem;padding: 10px">
+                                                        <p style="margin:5px 2px">上传时间：<{$source.createTime}></p>
+                                                        <p style="margin:5px 2px">更新时间：<{$source.updateTime}></p>
+                                                        <p style="margin:5px 2px">文件大小：<{$source.size}></p>
+                                                        <p style="margin:5px 2px">
+                                                            购买次数：<{$source->customers()->where("sid",$source->getData("id"))->count("id")}></p>
+                                                    </div>
+                                                    <p style="margin-top: 20px">
+                                                        <button class="layui-btn layui-btn-danger layui-btn-lg"
+                                                                onclick="download(<{$source.id}>)">付费下载
+                                                        </button>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-col-xs12 layui-col-sm10 layui-col-sm-offset1">
+                                    <div class="layui-card">
+                                        <div class="layui-card-header">
+                                            描述
+                                        </div>
+                                        <div class="layui-card-body">
+                                            <{$source.description_content|raw}>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-col-xs12 layui-col-sm10 layui-col-sm-offset1">
+                                    <div class="layui-card">
+                                        <div class="layui-card-header">
+                                            评论
+                                        </div>
+                                        <div class="layui-card-body layui-text">
+                                            <p class="p-source-reviews"><a href=""
+                                                                           class="p-source-reviews-user">巴依老爷</a> 回复
+                                                <a
+                                                        href=""
+                                                        class="p-source-reviews-user">安徒生的童话</a>
+                                                ：<span class="p-source-reviews-content">我也这样觉得</span><a
+                                                        class="reply-btn"><i
+                                                        class="layui-icon layui-icon-dialogue"></i></a>
+                                            </p>
+                                            <p class="p-source-reviews"><a href=""
+                                                                           class="p-source-reviews-user">安徒生的童话</a>：<span
+                                                    class="p-source-reviews-content">真的很不错了</span><a
+                                                    class="reply-btn"><i class="layui-icon layui-icon-dialogue"></i></a>
+                                            </p>
+                                            <p class="p-source-reviews"><a href=""
+                                                                           class="p-source-reviews-user">嬴政</a>：<span
+                                                    class="p-source-reviews-content">朕用着感觉很好</span><a
+                                                    class="reply-btn"><i class="layui-icon layui-icon-dialogue"></i></a>
+                                            </p>
+                                        </div>
+                                        <div class="layui-card-body">
+                                            <a onclick="nextPageComment()">下一页</a>
+                                            <a onclick="prePageComment()">上一页</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--    分页开始-->
+    <!--    页脚-->
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-xs12">
+            <div class="layui-bg-cyan layui-card layui-footer">
+                <div class="layui-text layui-card-body">
+                    <p>版权信息:本站版权归1771556583@qq.com所有</p>
+                    <p>商业合作：请联系1771556583@qq.com</p>
+                    <p>本产品中使用了layui的源代码，感谢layui的支持</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--    页脚结束-->
+</div>
+<div class="layui-card" id="pay_view" style="display: none;padding: 10px 15px;">
+    <div class="layui-card-body">
+        <table class="layui-table">
+            <tr>
+                <th>商品名:</th>
+                <td><{$source.source_name}></td>
+            </tr>
+            <tr>
+                <th>商品价格:</th>
+                <td><{$source.discount>0?
+                    "<span
+                            style='color: #FF5722;font-size: 1rem;font-weight: bolder'>折扣价:".($source->getData("price") - $source->getData("discount")) .
+                        "</span><span style='font-size: 0.3rem;color: rgba(0,0,0,0.3);text-decoration: line-through;'>原价".$source.price."</span>":
+                    $source.price}>
+                </td>
+            </tr>
+        </table>
+        <div class="layui-form-item">
+            <input type="password" id="passwd" placeholder="为了您的账号安全，请输入您的密码" class="layui-input">
+        </div>
+        <div class="layui-form-item">
+            <button class="layui-btn" style="width: 100%;" onclick="pay(<{$source.id}>)">确认购买</button>
+        </div>
+    </div>
+</div>
+<script src="/vender/layui/layui.js"></script>
+<script>
+    function download(id) {
+        layui.use(["jquery", "layer"], function () {
+            let $ = layui.jquery, layer = layui.layer;
+            let loading = layer.load();
+            $.ajax({
+                url: "/index/source/check"
+                , data: {"id": id}
+                , success: function (data) {
+                    layer.close(loading);
+                    layer.msg(data.msg);
+                    if (data.status !== 0) {
+                        PayView();
+                    } else {
+                        layer.msg("即将开始下载");
+                        window.location = "/index/source/download?v=" + data.data
+                    }
+                }
+            })
+        })
+    }
+
+    function pay(id) {
+        layui.use(["jquery"], function () {
+            let layer = layui.layer, $ = layui.jquery;
+            $.ajax({
+                url: "/index/source/pay"
+                , data: {"id": id, "password": $("#passwd").val(), "method": "integral"}
+                , success: function (data) {
+                    if (data.status !== 0) {
+                        layer.msg(data.msg);
+                        layer.msg("支付失败");
+                    } else {
+                        layer.msg("支付成功");
+                    }
+                }
+            })
+        })
+    }
+
+    function PayView() {
+        layui.use(["layer", "jquery"], function () {
+            layui.layer.open({
+                type: 1,
+                title: "支付",
+                content: layui.jquery("#pay_view"),
+                area: ["30%", "auto"],
+            })
+        })
+    }
+</script>
+</body>
+</html>

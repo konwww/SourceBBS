@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>资源发布</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="/vender/layui/css/layui.css" type="text/css" rel="stylesheet">
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+
+    <![endif]-->
+    <link href="/static/css/public.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/publish.css" rel="stylesheet" type="text/css">
+</head>
+<body class="layui-bg-gray">
+<div class="layui-fluid">
+    <!--    导航开始-->
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-xs12">
+            <ul class="layui-nav layui-bg-cyan">
+                <li class="layui-nav-item layui-logo">
+                    <a href="/"><img src="/static/other/img/logo.png" class="layui-logo"
+                                     style="max-height: 50px;max-width: 50px">P圈学习社区</a>
+                </li>
+                <li class="layui-nav-item" style="float: right">
+                    <{:session("user_id")?'<a href="/index/auth/logout.html">退出</a>':'
+                    <a href="/index/user/register.html">注册</a>
+                    '}>
+                </li>
+                <li class="layui-nav-item" style="float: right">
+                    <a href="/index/user/login.html"><{:session("user_info.username")?session("user_info.username"):"未登录"}></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--    导航结束-->
+    <div class="layui-row layui-col-space15" style="margin: 60px auto;">
+        <div class="layui-col-xs12 layui-col-md8 layui-col-md-offset2">
+            <div class="layui-card p-source-main p-card-bg-black">
+                <div class="layui-card-body">
+                    <div class="layui-card p-card-bg-white">
+                        <div class="layui-card-body">
+                            <div class="layui-row layui-col-space18">
+                                <div class="layui-col-xs12">
+                                    <div class="layui-card" style="min-width: 670px">
+                                        <div class="layui-card-header">
+                                            发布
+                                        </div>
+                                        <div class="layui-card-body p-form-main">
+                                            <form class="layui-form" id="publish">
+                                                <div class="layui-form-item">
+                                                    <img style="width: 30%;" id="preview_img">
+                                                </div>
+                                                <div class="layui-form-item">
+                                                    <label for="img">封面图：</label>
+                                                    <div class="layui-inline">
+                                                        <button id="img" type="button" class="layui-btn">上传封面图<i
+                                                                class="layui-icon layui-icon-upload"></i></button>
+                                                    </div>
+                                                </div>
+                                                <div class="layui-form-item">
+                                                    <label for="source_name">资源名称：</label>
+                                                    <div class="layui-inline">
+                                                        <input name="cover" type="hidden" id="cover">
+                                                        <input type="text" class="layui-input" id="source_name"
+                                                               name="source_name">
+                                                    </div>
+                                                </div>
+                                                <div class="layui-form-item">
+                                                    <label for="price">下载价格：</label>
+                                                    <div class="layui-inline">
+                                                        <input type="number" class="layui-input" id="price"
+                                                               name="price" placeholder="￥">
+                                                    </div>
+                                                </div>
+                                                <div class="layui-form-item">
+                                                    <label for="category">发布栏目：</label>
+                                                    <div class="layui-inline">
+                                                        <select class="layui-select" id="category" name="gid"
+                                                                lay-filter="gid">
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="layui-form-item">
+                                                    <label for="tags">添加标签：</label>
+                                                    <div class="layui-inline">
+                                                        <input type="text" class="layui-input" id="tags"
+                                                               name="tags">
+                                                    </div>
+                                                    <div class="layui-inline">
+                                                        <button class="layui-btn layui-btn-primary">添加</button>
+                                                    </div>
+                                                </div>
+                                                <div class="layui-form-item">
+                                                    <div class="layui-input-block">
+                                                        <span class="layui-badge-rim layui-bg-gray p-tag">视频</span> <i
+                                                            class="layui-icon layui-icon-close"></i>
+                                                        <span class="layui-badge-rim layui-bg-gray p-tag">考研</span> <i
+                                                            class="layui-icon layui-icon-close"></i>
+                                                        <span class="layui-badge-rim layui-bg-gray p-tag">张雪峰</span> <i
+                                                            class="layui-icon layui-icon-close"></i>
+                                                    </div>
+                                                </div>
+                                                <div id="editor"></div>
+                                                <div class="layui-form-item">
+                                                    <div class="layui-input-block">
+                                                        <button class="layui-btn layui-btn-lg" lay-submit type="button"
+                                                                lay-filter="submit" id="submit"
+                                                                style="width: 100%">发布
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--    分页开始-->
+    <!--    页脚-->
+    <!--    页脚结束-->
+</div>
+<div id="upload" style="display:none;padding: 10px 15px;">
+    <div class="layui-upload-drag" id="upload_btn">
+        <i class="layui-icon layui-icon-upload-drag"></i>
+        <p>点击或者拖拽上传文件</p>
+    </div>
+    <div style="margin: 10px 0;">
+        <button class="layui-btn" style="width: 100%" id="upload_confirm">上传</button>
+    </div>
+</div>
+<script src="https://unpkg.com/wangeditor@3.1.1/release/wangEditor.min.js"></script>
+<script src="/vender/layui/layui.js"></script>
+<script type="text/javascript">
+    var E = window.wangEditor;
+    var editor = new E('#editor');
+    // 或者 var editor = new E( document.getElementById('editor') )
+    editor.create()
+</script>
+<script>
+    layui.use(["jquery", "form", 'layer', 'upload'], function () {
+        let $ = layui.jquery;
+        $.ajax({
+            url: '/index/column/show'
+            , success: function (data) {
+                let selector = $("#category"), items = "";
+                for (let i in data.data) {
+                    items += "<option value='" + data.data[i].id + "'>" + data.data[i].group_name + "</option>"
+                }
+                selector.html(items);
+                layui.form.render("select");
+            }
+        });
+        var uploadImg = layui.upload.render({
+            elem: "#img"
+            , auto: true
+            , accept: "images"
+            , field: "cover"
+            , url: "./upload"
+            , choose: function (obj) {
+                obj.preview(function (index, file, result) {
+                    $('#preview_img').attr('src', result); //图片链接（base64）
+                })
+            }, done: function (res) {
+                $("#cover").val(res.saveName)
+            }
+        });
+        var uploadInst = layui.upload.render({
+            elem: '#upload_btn' //绑定元素
+            , auto: false
+            , url: './save' //上传接口
+            , accept: "file"
+            , field: 'profile'
+            , bindAction: "#upload_confirm"
+        });
+        layui.form.on("submit(submit)", function (elem) {
+            elem.field["description"] = editor.txt.html();
+            console.log(elem.field);
+            uploadInst.reload({
+                data: elem.field
+                , done: function (res) {
+                    layui.layer.closeAll()
+                }, error: function () {
+                    layui.layer.msg("上传失败")
+                }
+            });
+            layui.layer.open({
+                type: 1,
+                title: "文件上传",
+                content: $("#upload"),
+                area: ["30%", "300px"]
+            });
+            return false;
+        })
+    })
+</script>
+</body>
+</html>

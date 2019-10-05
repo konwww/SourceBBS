@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>P圈</title>
+    <link href="/vender/layui/css/layui.css" type="text/css" rel="stylesheet">
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/static/css/public.css" rel="stylesheet" type="text/css">
+</head>
+<body class="layui-bg-gray">
+<!--    导航开始-->
+<div class="layui-row layui-col-space15">
+    <div class="layui-col-xs12">
+        <ul class="layui-nav layui-bg-cyan">
+            <li class="layui-nav-item layui-logo">
+                <a href="/"><img src="/static/other/img/logo.png" class="layui-logo"
+                                 style="max-height: 50px;max-width: 50px">P圈学习社区</a>
+            </li>
+            <li class="layui-nav-item" style="float: right">
+                <{:session("user_id")?'<a href="/index/auth/logout.html">退出</a>':'
+                <a href="/index/user/register.html">注册</a>
+                '}>
+            </li>
+            <li class="layui-nav-item" style="float: right">
+                <a href="/index/user/login.html"><{:session("user_info.username")?session("user_info.username"):"未登录"}></a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!--    导航结束-->
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-xs12 layui-col-md12">
+            <div class="layui-card p-source-main p-card-bg-black">
+                <div class="layui-card-header">考研资料</div>
+                <div class="layui-card-body">
+                    <div class="layui-row layui-col-space35" id="cards">
+                        <div class="layui-col-xs12 layui-col-sm6 layui-col-md3 ">
+                            <div class="layui-card p-card-bg-white p-card-source-cell">
+                                <a href="./source-detail.html">
+                                    <div class="layui-card-body">
+                                        <img src="../static/other/img/temp1.jpg">
+                                        <div class="layui-text p-card-source-cell-title">
+                                            <p>考研宝典</p>
+                                            <p style="font-size:x-small">张雪峰</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="layui-col-xs12 layui-col-sm6 layui-col-md3 ">
+                            <div class="layui-card p-card-bg-white p-card-source-cell">
+                                <a href="#">
+                                    <div class="layui-card-body">
+                                        <img src="../static/other/img/temp1.jpg">
+                                        <div class="layui-text p-card-source-cell-title">
+                                            <p>考研宝典</p>
+                                            <p style="font-size:x-small">张雪峰</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="layui-col-xs12 layui-col-sm6 layui-col-md3 ">
+                            <div class="layui-card p-card-bg-white p-card-source-cell">
+                                <a href="#">
+                                    <div class="layui-card-body">
+                                        <img src="../static/other/img/temp1.jpg">
+                                        <div class="layui-text p-card-source-cell-title">
+                                            <p>考研宝典</p>
+                                            <p style="font-size:x-small">张雪峰</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="layui-col-xs12 layui-col-sm6 layui-col-md3 ">
+                            <div class="layui-card p-card-bg-white p-card-source-cell">
+                                <a href="#">
+                                    <div class="layui-card-body">
+                                        <img src="../static/other/img/temp1.jpg">
+                                        <div class="layui-text p-card-source-cell-title">
+                                            <p>考研宝典</p>
+                                            <p style="font-size:x-small">张雪峰</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="layui-col-xs12 layui-col-sm6 layui-col-md3 ">
+                            <div class="layui-card p-card-bg-white p-card-source-cell">
+                                <a href="#">
+                                    <div class="layui-card-body">
+                                        <img src="../static/other/img/temp1.jpg">
+                                        <div class="layui-text p-card-source-cell-title">
+                                            <p>考研宝典</p>
+                                            <p style="font-size:x-small">张雪峰</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="layui-col-xs12 layui-col-sm6 layui-col-md3 ">
+                            <div class="layui-card p-card-bg-white p-card-source-cell">
+                                <a href="#">
+                                    <div class="layui-card-body">
+                                        <img src="../static/other/img/temp1.jpg">
+                                        <div class="layui-text p-card-source-cell-title">
+                                            <p>考研宝典</p>
+                                            <p style="font-size:x-small">张雪峰</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="layui-col-xs12 layui-col-sm6 layui-col-md3 ">
+                            <div class="layui-card p-card-bg-white p-card-source-cell">
+                                <a href="#">
+                                    <div class="layui-card-body">
+                                        <img src="../static/other/img/temp1.jpg">
+                                        <div class="layui-text p-card-source-cell-title">
+                                            <p>考研宝典</p>
+                                            <p style="font-size:x-small">张雪峰</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="layui-col-xs12 layui-col-sm6 layui-col-md3 ">
+                            <div class="layui-card p-card-bg-white p-card-source-cell">
+                                <a href="#">
+                                    <div class="layui-card-body">
+                                        <img src="../static/other/img/temp1.jpg">
+                                        <div class="layui-text p-card-source-cell-title">
+                                            <p>考研宝典</p>
+                                            <p style="font-size:x-small">张雪峰</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--    分页开始-->
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12 layui-col-xs12">
+            <div class="layui-card p-card-bg-black">
+                <div class="layui-card-body">
+                    <div class="layui-text p-page" id="page">
+                        <span id="page-first" onclick='pageFirst()'>首页</span>
+                        <span id="page-prev" onclick='pagePrev()'>上一页</span>
+                        <span id="page-next" onclick="pageNext()">下一页</span>
+                        <span id="page-last" onclick="pageLast()">尾页</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--    页脚-->
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-xs12">
+            <div class="layui-bg-cyan layui-card">
+                <div class="layui-text layui-card-body">
+                    <p>版权信息:本站版权归1771556583@qq.com所有</p>
+                    <p>商业合作：请联系1771556583@qq.com</p>
+                    <p>本产品中使用了layui的源代码，感谢layui的支持</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--    页脚结束-->
+</div>
+<script src="/vender/layui/layui.js"></script>
+<script>
+    function getQueryVariable(variable) {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");
+            if (pair[0] == variable) {
+                return pair[1];
+            }
+        }
+        return (false);
+    }
+
+    layui.use(["jquery", "layer"], function () {
+        layui.jquery.ajax({
+            url: "/index/source/show"
+            , data: {"page": parseInt(getQueryVariable("page")), "group": getQueryVariable("gid")}
+            , success: function (data) {
+                console.log(data);
+                if (data.status !== 0) {
+                    layui.layer.msg(data.msg);
+                } else {
+                    CardRender(layui.jquery("#cards"), data.data);
+                    layui.jquery("#page-prev").attr("onclick", "pagePrev(" + data.count + ")");
+                    layui.jquery("#page-next").attr("onclick", "pageNext(" + data.count + ")");
+                }
+            }
+        });
+    });
+    let curr = parseInt(getQueryVariable("page")), limit = parseInt(getQueryVariable("limit")),
+        gid = parseInt(getQueryVariable("gid"));
+
+    function pageFirst() {
+        window.location = "/index/column/index?gid=" + gid + "&page=1&limit=" + limit;
+    }
+
+    function pageLast(count) {
+        window.location = "/index/column/index?gid=" + gid + "&page=" + (parseInt(count / limit) + 1) + "&limit=" + limit;
+    }
+
+    function pagePrev() {
+        if (curr <= 1) {
+            layui.use(["layer"], function () {
+                layui.layer.msg("亲，已经到头了，臣妾没法再向上翻页了")
+            })
+        } else {
+            window.location = "/index/column/index?gid=" + gid + "&page=" + (curr - 1) + "&limit=" + limit;
+
+        }
+
+    }
+
+    function pageNext(count) {
+        if (curr >= parseInt(count / limit) + 1) {
+            layui.use(["layer"], function () {
+                layui.layer.msg("亲，已经到底了，臣妾没法再向下翻页了")
+            })
+        } else {
+            window.location = "/index/column/index?gid=" + gid + "&page=" + (curr + 1) + "&limit=" + limit;
+
+        }
+    }
+
+    function CardRender(selector, items) {
+        let cards = "";
+        for (let i in items) {
+            cards += "                        <div class=\"layui-col-xs12 layui-col-sm6 layui-col-md3 \">\n" +
+                "                            <div class=\"layui-card p-card-bg-white p-card-source-cell\">\n" +
+                "                                <a href=\"#\">\n" +
+                "                                    <div class=\"layui-card-body\">\n" +
+                "                                        <img src=\"/static/cover/" + items[i].image + "\">\n" +
+                "                                        <div class=\"layui-text p-card-source-cell-title\">\n" +
+                "                                            <p>" + items[i].source_name + "</p>\n" +
+                "                                            <p style=\"font-size:x-small\">" + items[i].username + "</p>\n" +
+                "                                        </div>\n" +
+                "                                    </div>\n" +
+                "                                </a>\n" +
+                "                            </div>\n" +
+                "                        </div>"
+        }
+        selector.html(cards);
+    }
+
+</script>
+<script>
+    layui.use(["element", 'jquery'], function () {
+        let ele = layui.element;
+        let $ = layui.jquery;
+    });
+
+    function toggleSideNav() {
+        layui.use(["jquery", "layer"], function () {
+                let $ = layui.jquery;
+                let layer = layui.layer;
+
+            }
+        );
+
+    }
+</script>
+</body>
+</html>

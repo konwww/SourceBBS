@@ -19,9 +19,9 @@ return [
     // 应用地址
     'app_host'               => '',
     // 应用调试模式
-    'app_debug'              => false,
+    'app_debug'              => true,
     // 应用Trace
-    'app_trace'              => false,
+    'app_trace'              => true,
     // 是否支持多模块
     'app_multi_module'       => true,
     // 入口自动绑定模块
@@ -103,7 +103,7 @@ return [
     // 路由是否完全匹配
     'route_complete_match'   => false,
     // 使用注解路由
-    'route_annotation'       => false,
+    'route_annotation'       => true,
     // 域名根，如thinkphp.cn
     'url_domain_root'        => '',
     // 是否自动转换URL中的控制器和操作名

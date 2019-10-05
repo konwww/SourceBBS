@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="../vender/layui/css/layui.css" type="text/css" rel="stylesheet">
+    <link href="/vender/layui/css/layui.css" type="text/css" rel="stylesheet">
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/static/css/public.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/register.css" rel="stylesheet" type="text/css">
+</head>
+<body class="layui-bg-gray">
+<div class="layui-fluid">
+    <!--    导航开始-->
+    <!--    导航结束-->
+    <div class="layui-row layui-col-space15" style="margin-top: 170px;">
+        <div class="layui-col-xs12 layui-col-md4 layui-col-md-offset4">
+            <div class="layui-card p-source-main p-card-bg-black">
+                <div class="layui-card-body">
+                    <div class="layui-card p-card-bg-white">
+                        <div class="layui-card-body">
+                            <div class="layui-row layui-col-space18">
+                                <div class="layui-col-xs12">
+                                    <div class="layui-card">
+                                        <div class="layui-card-header">
+                                            注册
+                                        </div>
+                                        <div class="layui-card-body p-form-main">
+                                            <form class="layui-form">
+                                                <div class="layui-form-item">
+                                                    <div class="layui-input-block">
+                                                        <input type="text" class="layui-input" id="username"
+                                                               name="username" placeholder="用户名">
+                                                    </div>
+                                                </div>
+                                                <div class="layui-form-item">
+                                                    <div class="layui-input-block">
+                                                        <input type="email" class="layui-input" id="email"
+                                                               name="email" placeholder="邮箱">
+                                                    </div>
+                                                </div>
+                                                <div class="layui-form-item">
+                                                    <div class="layui-input-block">
+                                                        <input type="password" class="layui-input" id="password"
+                                                               name="password" placeholder="密码">
+                                                    </div>
+                                                </div>
+                                                <div class="layui-form-item">
+                                                    <div class="layui-input-block">
+                                                        <input type="password" class="layui-input" id="repeat-password"
+                                                               placeholder="重复密码">
+                                                    </div>
+                                                </div>
+                                                <div class="layui-form-item">
+                                                    <div class="layui-input-block">
+                                                        <button class="layui-btn layui-btn-lg" type="button"
+                                                                lay-filter="submit" lay-submit
+                                                                style="width: 100%">注册
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--    分页开始-->
+    <!--    页脚-->
+    <!--    页脚结束-->
+</div>
+<script src="../vender/layui/layui.js"></script>
+<script src="/vender/layui/layui.js"></script>
+<script>
+    layui.use(["form", "jquery"], function () {
+        layui.form.on("submit(submit)", function (elem) {
+            layui.jquery.ajax({
+                url: '/index/user/save'
+                , data: elem.field
+                , success: function (data) {
+                    layui.layer.msg(data.msg);
+                    //todo go to my home
+                }
+            })
+        })
+    });
+</script>
+</body>
+</html>

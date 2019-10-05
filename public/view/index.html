@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>P圈</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="../vender/layui/css/layui.css" type="text/css" rel="stylesheet">
+    <link href="/vender/layui/css/layui.css" type="text/css" rel="stylesheet">
+    <link href="/static/css/public.css" type="text/css" rel="stylesheet">
+    <link href="/static/css/index.css" type="text/css" rel="stylesheet">
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+
+        .recommend-index {
+            height: 300px;
+        }
+    </style>
+</head>
+<body class="layui-bg-gray">
+<div class="layui-fluid" style="background: none">
+    <!--    导航开始-->
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-xs12">
+            <ul class="layui-nav layui-bg-cyan">
+                <li class="layui-nav-item layui-logo">
+                    <a href="#"><img src="../static/other/img/logo.png" class="layui-logo" style="max-height: 50px;max-width: 50px">P圈学习社区</a>
+                </li>
+                <li class="layui-nav-item" style="float: right">
+                    <a href="./register.html">注册</a>
+                </li>
+                <li class="layui-nav-item" style="float: right">
+                    <a href="./login.html">登陆</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--    导航结束-->
+    <!--    轮播与搜索开始-->
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-xs12 layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-body p-nav" style="padding: 0;">
+                    <ul class="p-nav-content">
+                        <li><a href="./source-list.html">考研</a></li>
+                        <li><a href="./source-list.html">公考</a> </li>
+                        <li><a href="./source-list.html">期末考试</a> </li>
+                        <li><a href="./user.html">我的圈子</a></li>
+                    </ul>
+                </div>
+                <div class="layui-card-body" style="padding: 0">
+                    <div class="layui-row">
+                        <div class="layui-col-xs12 layui-col-md12">
+                            <div class="layui-carousel" id="carousel">
+                                <div carousel-item="">
+                                    <div class="layui-bg-blue"></div>
+                                    <div class="layui-bg-blue" style=""></div>
+                                    <div class="layui-bg-blue" style=""></div>
+                                    <div class="layui-bg-blue" style=""></div>
+                                    <div class="layui-bg-blue" style=""></div>
+                                    <div class="layui-bg-blue" style=""></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--    轮播搜索结束-->
+    <!--    推荐位开始-->
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-xs12 layui-col-md12">
+            <div class="layui-row">
+                <div class="layui-col-xs12 layui-col-md3">
+                    <div class="layui-card recommend-index">
+                        <div class="layui-card-header">
+                            热门推荐
+                        </div>
+                        <div class="layui-card-body">
+                            <ul>
+                                <li style="color: red;">推荐位1</li>
+                                <li>推荐位2</li>
+                                <li>推荐位3</li>
+                                <li>推荐位4</li>
+                                <li>推荐位5</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-xs12 layui-col-md6">
+                    <div class="layui-card recommend-index">
+                        <div class="layui-card-body">
+                            <div class="layui-carousel" id="carousel-recommend">
+                                <div carousel-item="">
+                                    <div class="layui-bg-gray"></div>
+                                    <div class="layui-bg-green"></div>
+                                    <div class="layui-bg-gray"></div>
+                                    <div class="layui-bg-green"></div>
+                                    <div class="layui-bg-gray"></div>
+                                    <div class="layui-bg-green"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-xs12 layui-col-md3">
+                    <div class="layui-card recommend-index">
+                        <div class="layui-card-header">
+                            热门推荐
+                        </div>
+                        <div class="layui-card-body">
+                            <ul>
+                                <li>推荐位1</li>
+                                <li>推荐位2</li>
+                                <li>推荐位3</li>
+                                <li>推荐位4</li>
+                                <li>推荐位5</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--    推荐位结束-->
+    <!--    页脚-->
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-xs12">
+            <div class="layui-bg-cyan layui-card layui-footer">
+                <div class="layui-card-body layui-text">
+                    <p>版权信息:本站版权归1771556583@qq.com所有</p>
+                    <p>商业合作：请联系1771556583@qq.com</p>
+                    <p>本产品中使用了layui的源代码，感谢layui的支持</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--    页脚结束-->
+</div>
+<script src="../vender/layui/layui.js"></script>
+<script src="/vender/layui/layui.js"></script>
+<script>
+    layui.use(['carousel'], function () {
+        let carousel = layui.carousel;
+        carousel.render({
+            elem: "#carousel"
+            , width: "100%"
+            , autoplay: true
+        });
+        carousel.render({
+            elem: '#carousel-recommend'
+            , width: '100%'
+            , anim: 'fade'
+        });
+    });
+
+    //TODO 获取轮播信息
+    function getCarouselItem() {
+        layui.use(['jquery', function () {
+            let jquery = layui.jquery;
+            jquery.ajax({
+                url: ''
+            });
+        }])
+    }
+
+    //todo 构造轮播DOM
+    /**
+     * data=>[
+     *      item_url=>(string)''
+     *      ,a_url=>(string)''
+     *      ,alt=>(string)''
+     */
+    function renderCarouselItem(data) {
+
+    }
+</script>
+<script>
+    layui.use('element', function () {
+        let elem = layui.element;
+    })
+</script>
+</body>
+</html>

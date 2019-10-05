@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人信息</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="../vender/layui/css/layui.css" type="text/css" rel="stylesheet">
+    <link href="/vender/layui/css/layui.css" type="text/css" rel="stylesheet">
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+
+    <![endif]-->
+    <link href="/static/css/public.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/user.css" rel="stylesheet" type="text/css">
+</head>
+<!--    导航开始-->
+<div class="layui-row layui-col-space15">
+    <div class="layui-col-xs12">
+        <ul class="layui-nav layui-bg-cyan">
+            <li class="layui-nav-item layui-logo">
+                <a href="/"><img src="/static/other/img/logo.png" class="layui-logo"
+                                 style="max-height: 50px;max-width: 50px">P圈学习社区</a>
+            </li>
+            <li class="layui-nav-item" style="float: right">
+                <{:session("user_id")?'<a href="/index/auth/logout.html">退出</a>':'
+                <a href="/index/user/register.html">注册</a>
+                '}>
+            </li>
+            <li class="layui-nav-item" style="float: right">
+                <a href="/index/user/login.html"><{:session("user_info.username")?session("user_info.username"):"未登录"}></a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!--    导航结束-->
+<div class="layui-fluid">
+
+    <div class="layui-row layui-col-space15" style="margin: 60px auto;">
+        <div class="layui-col-xs12 layui-col-md8 layui-col-md-offset2">
+            <div class="layui-card p-source-main p-card-bg-black">
+                <div class="layui-card-body">
+                    <div class="layui-card p-card-bg-white">
+                        <div class="layui-card-body">
+                            <div class="layui-row layui-col-space18">
+                                <div class="layui-col-xs12">
+                                    <div class="layui-card">
+                                        <div class="layui-card-header" id="username">
+                                            <{$user.username}>
+                                        </div>
+                                        <div class="layui-card-body p-form-main">
+                                            <div class="layui-row">
+                                                <div class="layui-col-xs12 layui-col-sm4 layui-col-sm-offset2"
+                                                     style="text-align: center;">
+                                                    <img class="p-avatar p-avatar-lg"
+                                                         src="/static/other/img/temp1.jpg">
+                                                </div>
+                                                <div class="layui-col-xs12 layui-col-sm6">
+                                                    <div class="p-avatar-info">
+                                                        <br>
+                                                        <p style="font-weight: bolder;font-size: 1rem;color: #01AAED;">
+                                                            <{$user.username}>
+                                                        </p>
+                                                        <p style="font-weight: bolder;font-size: 0.7rem;color: gray;">
+                                                            这个人很懒，什么都没写</p>
+                                                        <p style="font-weight: bolder;font-size: 0.7rem;color: gray;">
+                                                            关注：0人</p>
+                                                        <p style="font-weight: bolder;font-size: 0.7rem;color: gray;">
+                                                            粉丝：4人</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="layui-row">
+                                                <div class="layui-col-xs12">
+                                                    <div class="layui-card">
+                                                        <div class="layui-card-header">
+                                                            发布时间线
+                                                        </div>
+                                                        <div class="layui-card-body">
+                                                            <ul class="layui-timeline">
+                                                                <li class="layui-timeline-item">
+                                                                    <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+                                                                    <div class="layui-timeline-content">
+                                                                        <h3 class="layui-timeline-title">2019年12月8日</h3>
+                                                                        <div class="layui-card layui-bg-gray">
+                                                                            <div class="layui-card-body">
+                                                                                <img src="/static/other/img/temp1.jpg"
+                                                                                     style="border-radius: 2px;max-width: 50px;max-height: 50px;">
+                                                                                <span>《考研宝典》</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--    分页开始-->
+    <!--    页脚-->
+    <!--    页脚结束-->
+</div>
+<script src="../vender/layui/layui.js"></script>
+<script src="/vender/layui/layui.js"></script>
+<script>
+    layui.use(["jquery"], function () {
+        layui.jquery.ajax({
+            url: "./read"
+            , success: function (data) {
+                if (data.status === 0) {
+                    layui.jquery()
+                }
+            }
+        });
+    })
+</script>
+</body>
+</html>
