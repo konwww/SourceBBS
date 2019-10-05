@@ -3,7 +3,7 @@
 namespace app\index\controller;
 
 use app\index\model\Bill;
-use app\index\Model\Source as SourceAlias;
+use app\index\model\Source as SourceAlias;
 use think\Controller;
 use think\facade\Session;
 use think\Request;
