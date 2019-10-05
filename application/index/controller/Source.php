@@ -80,7 +80,7 @@ class Source extends Controller
     public function read($id = "")
     {
         $profile = SourceAlias::get($id);
-        return Response::create(["msg" => "", "status" => 0, "data" => $profile->getData]);
+        return Response::create(["msg" => "", "status" => 0, "data" => $profile->getData], "json");
     }
 
     public function show($group = 1, $page = 1, $limit = 10)
