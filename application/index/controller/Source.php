@@ -3,6 +3,7 @@
 namespace app\index\controller;
 
 use app\index\model\Bill;
+use app\index\Model\Source as SourceAlias;
 use think\Controller;
 use think\facade\Session;
 use think\Request;
@@ -17,7 +18,7 @@ class Source extends Controller
      */
     public function index($id)
     {
-        $result = \app\index\Model\Source::get($id);
+        $result = SourceAlias::get($id);
         if (is_null($result)) $this->error("页面不存在");
         $this->assign("source", $result);
         return $this->fetch("Source/detail");
@@ -56,7 +57,7 @@ class Source extends Controller
     {
         //目标文件
         $file = Profile::upload($request, "../uploads/", "profile");
-        $result = \app\index\Model\Source::create([
+        $result = SourceAlias::create([
             "source_name" => $source_name,
             "path" => $file->getPath() . $file->getSaveName(),
             "image" => $cover,
@@ -78,17 +79,17 @@ class Source extends Controller
      */
     public function read($id = "")
     {
-        $profile = \app\index\Model\Source::get($id);
+        $profile = SourceAlias::get($id);
         return Response::create(["msg" => "", "status" => 0, "data" => $profile->getData]);
     }
 
     public function show($group = 1, $page = 1, $limit = 10)
     {
-        $data = \app\index\Model\Source::where("gid", $group)->hidden(["switch", "md5", "description_content", "path"])->page($page, $limit)->select();
+        $data = SourceAlias::where("gid", $group)->hidden(["switch", "md5", "description_content", "path"])->page($page, $limit)->select();
         foreach ($data as $key => $item) {
             $data[$key]["username"] = \app\index\model\User::get($item["author_id"])->getData("username");
         }
-        $count = \app\index\Model\Source::where("gid", $group)->count();
+        $count = SourceAlias::where("gid", $group)->count();
         return Response::create(["status" => 0, "error" => false, "data" => $data, "count" => $count], "json");
     }
 
@@ -125,7 +126,7 @@ class Source extends Controller
      */
     public function delete($id)
     {
-        $profile = \app\index\Model\Source::destroy($id);
+        $profile = SourceAlias::destroy($id);
     }
 
 
@@ -141,7 +142,7 @@ class Source extends Controller
         //todo 支付程序
         $result = Auth::verifyPassword($password);
         if (!$result) return Response::create(["msg" => "密码错误", "error" => true, "status" => 1], "json");
-        $source = \app\index\Model\Source::find($id);
+        $source = SourceAlias::find($id);
         if (is_null($source)) return Response::create(["msg" => "您要购买的资源不存在"], "json");
         $price = $source->getData("price") - $source->getData("discount");
         $bill = Bill::create(["uid" => Session::get("user_id"), "sid" => $id, "price" => $price]);
@@ -155,7 +156,7 @@ class Source extends Controller
         $uid = Session::get("user_id");
         $id = $data["id"];
         if ($data["uid"] != $uid) $this->error("没有下载权限");
-        $source = \app\index\Model\Source::get($id);
+        $source = SourceAlias::get($id);
         return download($source->getData("path") . "1570118261.jpg", $source->getData("source_name"))->expire(600);
     }
 

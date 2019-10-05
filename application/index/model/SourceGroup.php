@@ -14,7 +14,7 @@ class SourceGroup extends Model
     protected $updateTime = "updateTime";
     protected $createTime = "updateTime";
     protected $autoWriteTimestamp = "datetime";
-    protected $table="p_source_group";
+    protected $table = "p_source_group";
 
     public function sources()
     {
