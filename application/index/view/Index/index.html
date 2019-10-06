@@ -78,14 +78,14 @@
     <div class="layui-row layui-col-space15">
         <div class="layui-col-xs12 layui-col-md12">
             <div class="layui-row">
-                <div class="layui-col-xs12 layui-col-md3">
+                <div class="layui-col-xs12 layui-col-md4">
                     <div class="layui-card recommend-index">
                         <div class="layui-card-header">
-                            热门推荐
+                            大家都在买
                         </div>
                         <div class="layui-card-body">
-                            <ul>
-                                <li style="color: red;">推荐位1</li>
+                            <ul id="hot">
+                                <li>推荐位1</li>
                                 <li>推荐位2</li>
                                 <li>推荐位3</li>
                                 <li>推荐位4</li>
@@ -94,30 +94,31 @@
                         </div>
                     </div>
                 </div>
-                <div class="layui-col-xs12 layui-col-md6">
+
+                <div class="layui-col-xs12 layui-col-md4">
                     <div class="layui-card recommend-index">
+                        <div class="layui-card-header">
+                            最新发布
+                        </div>
                         <div class="layui-card-body">
-                            <div class="layui-carousel" id="carousel-recommend">
-                                <div carousel-item="">
-                                    <div class="layui-bg-gray"></div>
-                                    <div class="layui-bg-green"></div>
-                                    <div class="layui-bg-gray"></div>
-                                    <div class="layui-bg-green"></div>
-                                    <div class="layui-bg-gray"></div>
-                                    <div class="layui-bg-green"></div>
-                                </div>
-                            </div>
+                            <ul id="latest">
+                                <li onmouseover=""><span>资源名称</span><span>更新时间</span></li>
+                                <li>推荐位2</li>
+                                <li>推荐位3</li>
+                                <li>推荐位4</li>
+                                <li>推荐位5</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-                <div class="layui-col-xs12 layui-col-md3">
+                <div class="layui-col-xs12 layui-col-md4">
                     <div class="layui-card recommend-index">
                         <div class="layui-card-header">
-                            热门推荐
+                            好货推荐
                         </div>
                         <div class="layui-card-body">
-                            <ul>
-                                <li>推荐位1</li>
+                            <ul id="commend">
+                                <li onmouseover=""><span>资源名称</span><span>更新时间</span></li>
                                 <li>推荐位2</li>
                                 <li>推荐位3</li>
                                 <li>推荐位4</li>
@@ -147,8 +148,8 @@
 <script src="../vender/layui/layui.js"></script>
 <script src="/vender/layui/layui.js"></script>
 <script>
-    layui.use(['carousel'], function () {
-        let carousel = layui.carousel;
+    layui.use(['carousel', "jquery", "layer"], function () {
+        let carousel = layui.carousel, $ = layui.jquery;
         carousel.render({
             elem: "#carousel"
             , width: "100%"
@@ -159,6 +160,50 @@
             , width: '100%'
             , anim: 'fade'
         });
+        $.ajax({
+            url: "/index/source/hot"
+            , success: function (data) {
+                let hot = "";
+                data = data.data;
+                for (let i in data) {
+                    hot += "<li data-img='"
+                        + data[i].image + "' onmouseover='renderCover(this)'><a href='/index/source/index?id="
+                        + data[i].id + "'><span>"
+                        + data[i].source_name + "</span><span>更新时间："
+                        + data[i].updateTime + "</span></a></li>";
+                }
+                $("#hot").html(hot);
+            }
+        });
+        $.ajax({
+            url: "/index/source/latest"
+            , success: function (data) {
+                let item = "";
+                data = data.data;
+                for (let i in data) {
+                    item += "<li><a href='/index/source/index?id="
+                        + data[i].id + "'><span>"
+                        + data[i].source_name + "</span><span>更新时间："
+                        + data[i].updateTime + "</span></a></li>";
+                }
+                $("#latest").html(item);
+            }
+        });
+        $.ajax({
+            url: "/index/source/commend"
+            , success: function (data) {
+                let item = "";
+                data = data.data;
+                for (let i in data) {
+                    item += "<li><a href='/index/source/index?id="
+                        + data[i].id + "'><span>"
+                        + data[i].source_name + "</span><span>更新时间："
+                        + data[i].updateTime + "</span></a></li>";
+                }
+                $("#commend").html(item);
+            }
+        });
+
     });
 
     //TODO 获取轮播信息
@@ -169,17 +214,6 @@
                 url: ''
             });
         }])
-    }
-
-    //todo 构造轮播DOM
-    /**
-     * data=>[
-     *      item_url=>(string)''
-     *      ,a_url=>(string)''
-     *      ,alt=>(string)''
-     */
-    function renderCarouselItem(data) {
-
     }
 </script>
 <script>

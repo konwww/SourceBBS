@@ -41,6 +41,39 @@ class Source extends Controller
         return Response::create(["path" => "/static/cover/", "saveName" => $file->getSaveName(), "md5" => $file->hash("md5")], "json");
     }
 
+    public function hot($page = 1, $limit = 10)
+    {
+        $subQuery = Bill::field("count(sid) as count_id,sid as id")->visible(["id"])->order("count_id")->page($page, $limit)->select();
+        //子查询死活查不出数据，只能采用手动的方式来查询了
+        $data = [];
+        foreach ($subQuery as $item) {
+            array_push($data, $item["id"]);
+        }
+        $data = SourceAlias::where("id", "in", $data)->select();
+        return Response::create(["data" => $data, "status" => 0, "error" => false], "json");
+    }
+
+    public function latest($page = 1, $limit = 10)
+    {
+        $data = SourceAlias::order("createTime", "desc")->limit(($page - 1) * $limit, $limit)->select();
+        return Response::create(["data" => $data, "status" => 0, "error" => false], "json");
+    }
+
+    public function commend()
+    {
+        $subQuery = Bill::field("count(sid) as count_id,sid as id")->visible(["id"])->order("count_id")->limit(0, 100)->select();
+        //子查询死活查不出数据，只能采用手动的方式来查询了
+        $data = [];
+        foreach ($subQuery as $item) {
+            array_push($data, $item["id"]);
+        }
+        $keys = [];
+        for ($i = 0; $i < count($data) && $i <= 10; $i++) {
+            array_push($keys, $data[rand(0, count($data))]);
+        }
+        $data = SourceAlias::where("id", "in", $keys)->select();
+        return Response::create(["data" => $data, "status" => 0, "error" => false], "json");
+    }
 
     /**
      * 保存新建的资源

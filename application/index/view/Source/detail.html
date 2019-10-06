@@ -60,13 +60,13 @@
                                                          style="border-radius: 2px;margin-top: 15px;font-size: 0.8rem;padding: 10px">
                                                         <p style="margin:5px 2px">上传时间：<{$source.createTime}></p>
                                                         <p style="margin:5px 2px">更新时间：<{$source.updateTime}></p>
-                                                        <p style="margin:5px 2px">文件大小：<{$source.size}></p>
+                                                        <p style="margin:5px 2px">文件大小：<{$source.size/1024/1024}>MB</p>
                                                         <p style="margin:5px 2px">
-                                                            购买次数：<{$source->customers()->where("sid",$source->getData("id"))->count("id")}></p>
+                                                            销售次数：<{$source->customers()->where("sid",$source->getData("id"))->count("id")}></p>
                                                     </div>
                                                     <p style="margin-top: 20px">
                                                         <button class="layui-btn layui-btn-danger layui-btn-lg"
-                                                                onclick="download(<{$source.id}>)">付费下载
+                                                                onclick="download(<{$source.id}>)">立即下载
                                                         </button>
                                                     </p>
                                                 </div>
