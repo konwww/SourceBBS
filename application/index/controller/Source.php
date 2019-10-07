@@ -69,7 +69,7 @@ class Source extends Controller
         }
         $keys = [];
         for ($i = 0; $i < count($data) && $i <= 10; $i++) {
-            array_push($keys, $data[rand(0, count($data))]);
+            array_push($keys, $data[rand(0, count($data)-1)]);
         }
         $data = SourceAlias::where("id", "in", $keys)->select();
         return Response::create(["data" => $data, "status" => 0, "error" => false], "json");
