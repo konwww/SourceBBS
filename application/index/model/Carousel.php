@@ -14,4 +14,5 @@ class Carousel extends Model
     public $autoWriteTimestamp = "datetime";
     protected $updateTime="updateTi";
     protected $createTime="createTi";
+    protected $table="p_carousel";
 }

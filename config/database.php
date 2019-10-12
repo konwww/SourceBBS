@@ -17,11 +17,11 @@ return [
     // 数据库名
     'database' => 'p',
     // 用户名
-    'username' => 'p',
-//    'username' => 'root',
+//    'username' => 'p',
+    'username' => 'root',
     // 密码
-    'password' => 'p123@123',
-//    'password' => "123456",
+//    'password' => 'p123@123',
+    'password' => "123456",
     // 端口
     'hostport' => '',
     // 连接dsn

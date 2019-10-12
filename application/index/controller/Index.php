@@ -10,6 +10,8 @@ class Index extends Controller
     public function index()
     {
         $column = SourceGroup::select();
+        $carousel=\app\index\model\Carousel::select();
+        $this->assign("carousel",$carousel);
         $this->assign("column", $column);
         return $this->fetch("Index/index");
     }
