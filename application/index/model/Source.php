@@ -3,13 +3,15 @@
 namespace app\index\model;
 
 use think\Model;
+use think\model\concern\SoftDelete;
 
 class Source extends Model
 {
+    use SoftDelete;
     protected $table = "p_source";
     protected $updateTime = "updateTime";
     protected $createTime = "createTime";
-    protected $deleteTime;
+    protected $deleteTime="deleteTime";
     public $id;
     public $source_name;
     public $path;
