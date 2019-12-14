@@ -1,0 +1,7 @@
+div.ql-container {
+    min-height: 200px;
+}
+
+.publish div.ql-container {
+    min-height: 500px;
+}
