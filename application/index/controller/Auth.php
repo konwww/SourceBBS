@@ -14,6 +14,7 @@ use think\Response;
 
 class Auth extends Controller
 {
+    public $model;
     /**
      * @param $account
      * @param $password

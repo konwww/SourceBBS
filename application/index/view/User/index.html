@@ -6,7 +6,6 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href="../vender/layui/css/layui.css" type="text/css" rel="stylesheet">
     <link href="/vender/layui/css/layui.css" type="text/css" rel="stylesheet">
     <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
     <!--[if lt IE 9]>
@@ -73,6 +72,8 @@
                                                             关注：0人</p>
                                                         <p style="font-weight: bolder;font-size: 0.7rem;color: gray;">
                                                             粉丝：4人</p>
+                                                        <p style="font-weight: bolder;font-size: 0.7rem;color: gray;">
+                                                            账户余额：<{$user.integral}></p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -83,21 +84,7 @@
                                                             发布时间线
                                                         </div>
                                                         <div class="layui-card-body">
-                                                            <ul class="layui-timeline">
-                                                                <li class="layui-timeline-item">
-                                                                    <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
-                                                                    <div class="layui-timeline-content">
-                                                                        <h3 class="layui-timeline-title">2019年12月8日</h3>
-                                                                        <div class="layui-card layui-bg-gray">
-                                                                            <div class="layui-card-body">
-                                                                                <img src="/static/other/img/temp1.jpg"
-                                                                                     style="border-radius: 2px;max-width: 50px;max-height: 50px;">
-                                                                                <span>《考研宝典》</span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-
+                                                            <ul class="layui-timeline" id="timeline">
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -118,19 +105,41 @@
     <!--    页脚-->
     <!--    页脚结束-->
 </div>
-<script src="../vender/layui/layui.js"></script>
 <script src="/vender/layui/layui.js"></script>
 <script>
     layui.use(["jquery"], function () {
-        layui.jquery.ajax({
-            url: "./read"
-            , success: function (data) {
-                if (data.status === 0) {
-                    layui.jquery()
+        let $ = layui.jquery;
+        $.ajax({
+            url: "/index/source/filterByAuthor"
+            , data: {
+                uid: "<{:session('user_id')}>",
+                page: -1
+            },
+            success: function (data) {
+                let items = "";
+                data = data.data;
+                for (let i in data) {
+                    items += timelineItemTpl(data[i].updateTime, data[i].source_name, data[i].image, data[i].id);
                 }
+                $("#timeline").html(items)
             }
-        });
-    })
+        })
+    });
+
+    function timelineItemTpl(date, source_name, img, id) {
+        return "<li class='layui-timeline-item'><div class='layui-timeline-content'> \n" +
+            "                                                                    <i class=\"layui-icon layui-timeline-axis\">&#xe63f;</i>\n" +
+            "                                                                        <h3 class=\"layui-timeline-title\">" + date + "</h3>\n" +
+            "                                                                       <a class=\"layui-timeline-item\" href='/index/source/index?id=" + id + "'>" +
+            "                                                                            <div class=\"layui-card layui-bg-gray\">\n" +
+            "                                                                            <div class=\"layui-card-body\">\n" +
+            "                                                                                <img src=\"/static/cover/" + img + "\"\n" +
+            "                                                                                     style=\"border-radius: 2px;max-width: 50px;max-height: 50px;\">\n" +
+            "                                                                                <span>" + source_name + "</span>\n" +
+            "                                                                           </div>\n" +
+            "                                                                           </div></a></div>\n" +
+            "                                                                </li>";
+    }
 </script>
 </body>
 </html>

@@ -43,13 +43,13 @@ class Source extends Controller
 
     public function hot($page = 1, $limit = 10)
     {
-        $subQuery = Bill::field("count(sid) as count_id,sid as id")->visible(["id"])->order("count_id")->page($page, $limit)->select();
+        $subQuery = Bill::field("count(sid) as count_id,sid")->group("sid")->visible(["id"])->order("count_id","desc")->select();
         //子查询死活查不出数据，只能采用手动的方式来查询了
         $data = [];
         foreach ($subQuery as $item) {
-            array_push($data, $item["id"]);
+            array_push($data, $item["sid"]);
         }
-        $data = SourceAlias::where("id", "in", $data)->select();
+        $data = SourceAlias::where("id", "in", $data)->page($page, $limit)->select();
         return Response::create(["data" => $data, "status" => 0, "error" => false], "json");
     }
 
@@ -61,15 +61,15 @@ class Source extends Controller
 
     public function commend()
     {
-        $subQuery = Bill::field("count(sid) as count_id,sid as id")->visible(["id"])->order("count_id")->limit(0, 100)->select();
+        $subQuery = Bill::field("count(sid) as count_id,sid")->group("sid")->order("count_id","desc")->limit(0, 1000)->select();
         //子查询死活查不出数据，只能采用手动的方式来查询了
         $data = [];
         foreach ($subQuery as $item) {
-            array_push($data, $item["id"]);
+            array_push($data, $item["sid"]);
         }
         $keys = [];
         for ($i = 0; $i < count($data) && $i <= 10; $i++) {
-            array_push($keys, $data[rand(0, count($data)-1)]);
+            array_push($keys, $data[rand(0, count($data) - 1)]);
         }
         $data = SourceAlias::where("id", "in", $keys)->select();
         return Response::create(["data" => $data, "status" => 0, "error" => false], "json");
@@ -220,4 +220,24 @@ class Source extends Controller
         return json_decode(base64_decode($secret), true);
     }
 
+    /**
+     * @param $exp
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    private function _filter($exp, $page = 1, $limit = 10)
+    {
+        if ($page > 1)
+            $data = SourceAlias::where($exp)->order("updateTime", "desc")->page($page, $limit)->select();
+        else
+            $data = SourceAlias::where($exp)->order("updateTime", "desc")->select();
+        return $data;
+    }
+
+    public function filterByAuthor($uid, $page = 1, $limit = 10)
+    {
+        $data = $this->_filter(["author_id" => $uid], $page, $limit);
+        return Response::create(["msg" => "success", "data" => $data, "error" => false, "status" => 0], "json");
+    }
 }

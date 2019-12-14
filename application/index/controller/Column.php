@@ -22,4 +22,10 @@ class Column extends Controller
         $group = SourceGroup::select();
         return Response::create(["data" => $group, "status" => 0, "error" => false], 'json');
     }
+
+    public function get($id)
+    {
+        $data = SourceGroup::get($id);
+        if (!is_null($data)) return Response::create(["data" => $data->getData(), "msg" => "ok"], "json");
+    }
 }

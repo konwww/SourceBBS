@@ -4,7 +4,12 @@
 namespace app\index\model;
 
 
-class TopicGroup
-{
+use think\Model;
 
+class TopicGroup extends Model
+{
+    public $table = "p_topic_group";
+    public $group_name;
+    public $id;
+    public $group_description;
 }

@@ -24,7 +24,6 @@ class User extends Controller
     public function index()
     {
         //
-
         $result = $this->read();
         $this->assign("user", $result->getData()["data"]);
         return $this->fetch("User/index");
@@ -72,7 +71,7 @@ class User extends Controller
     public function read($id = "")
     {
         //
-        if (empty($id)) $id = \think\facade\Session::get("user_id");
+        if (empty($id)) $id = Session::get("user_id");
         $user = \app\index\model\User::get($id);
         return Response::create(["msg" => "", "status" => 0, "data" => $user->getData()], "json");
     }

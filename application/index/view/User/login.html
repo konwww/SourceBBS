@@ -48,7 +48,7 @@
                                                 </div>
                                                 <div class="layui-form-item">
                                                     <div class="layui-input-block">
-                                                        <button class="layui-btn layui-btn-lg" lay-submit=""
+                                                        <button class="layui-btn layui-btn-lg" type="button" lay-submit=""
                                                                 lay-filter="submit" style="width: 100%">登陆
                                                         </button>
                                                     </div>
@@ -80,8 +80,10 @@
                 , success: function (data) {
                     layui.layer.msg(data.msg);
                     if (data.status === 0) {
-                        window.location.reload();
+                        window.location="./index.html";
                     }
+                },error:function (xhr) {
+                    layui.layer.msg(xhr.responseJSON["msg"]);
                 }
             })
         })
